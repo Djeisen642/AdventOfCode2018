@@ -1,7 +1,15 @@
-const list = require('../modules/fileReader');
+const {data, biggestX, biggestY} = require('./parseData');
+const multiDimArray = new Array(biggestX*biggestY).fill(0);
 
-const regex = /#(\d+) @ (\d+),(\d+): (\d+)x(\d+)/;
-for (const string of list) {
-  const [, id, x, y, width, height] = string.match(regex);
-  console.log(id, x, y, width, height);
-}
+data.forEach((datum) => {
+  for (let i = 0; i < datum.height; i++) {
+    for (let j = 0; j < datum.width; j++) {
+      const index = (datum.y+i)*biggestX+(datum.x+j);
+      multiDimArray[index] ++;
+    }
+  }
+});
+
+console.log(multiDimArray.filter((value) => value > 1).length);
+
+
