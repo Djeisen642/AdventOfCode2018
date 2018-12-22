@@ -1,5 +1,6 @@
 const {parsedData, biggestX, biggestY} = require('./parser');
 const yargs = require('yargs')
+    .demand(['d'])
     .string('d')
     .describe('d', 'Maximum distance')
     .argv;

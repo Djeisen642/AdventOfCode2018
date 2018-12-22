@@ -7,6 +7,7 @@ const yargs = require('yargs')
     .boolean('s')
     .alias('s', 'split')
     .describe('s', 'Split by line')
+    .demand(['f'])
     .argv;
 
 const input = fs.readFileSync(yargs.f, 'utf-8');
