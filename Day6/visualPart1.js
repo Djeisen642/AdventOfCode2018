@@ -1,31 +1,32 @@
-const data = require('../modules/fileReader');
-
-const parsedData = data.map((datum) => {
-  const [, x, y] = datum.match(/(\d+), (\d+)/);
-  return {
-    x,
-    y,
-  };
-});
-
-let biggestX = 0;
-let biggestY = 0;
-parsedData.forEach((currentDatum) => {
-  biggestX = Math.max(biggestX, currentDatum.x);
-  biggestY = Math.max(biggestY, currentDatum.y);
-});
-
-// Add 1 for good measure
-biggestX = biggestX + 1;
-biggestY = biggestY + 1;
+const {parsedData, biggestX, biggestY} = require('./parser');
 
 const area = new Array(biggestY * biggestX).fill('.');
 
 for (let i = 0; i < area.length; i++) {
-  const x = i % biggestY;
-  const y = Math.floor(i / biggestY);
+  const x = i % biggestX;
+  const y = Math.floor(i / biggestX);
 
+  let closestDistance = Infinity;
+  let closestIndex = -1;
+  parsedData.forEach((datum, index) => {
+    const distance = Math.abs(datum.x - x) + Math.abs(datum.y - y);
 
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestIndex = index;
+    } else if (distance === closestDistance) {
+      closestIndex = -1;
+    }
+  });
 
-  parsedData.forEach()
+  if (closestIndex === -1) {
+    area[i] = '.';
+  } else {
+    area[i] = closestIndex;
+  }
+}
+
+while (area.length) {
+  const line = area.splice(0, biggestX);
+  console.log(line.join(''));
 }

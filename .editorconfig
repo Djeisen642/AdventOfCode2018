@@ -5,14 +5,5 @@ insert_final_newline=false
 indent_style=space
 indent_size=2
 
-[{.eslintrc}]
-indent_style=space
-indent_size=2
-
-[{.editorconfig}]
-indent_style=space
-indent_size=2
-
-[{*.js}]
-insert_final_newline=false
-
+[**.js]
+insert_final_newline=true
