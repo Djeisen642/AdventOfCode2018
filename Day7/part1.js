@@ -25,7 +25,7 @@ while (traversed !== numSteps) {
     }
   }
   traversed ++;
-  console.log(currentStep, choices);
+
   stepString += currentStep;
   const nextSteps = steps[currentStep].nextSteps;
   if (nextSteps.length) {
